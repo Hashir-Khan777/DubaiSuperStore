@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Dubai Super Store",
+    "slug": "DubaiSuperStore",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.joharsoftwarehouse.dubaisuperstore"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.joharsoftwarehouse.dubaisuperstore"
+    },
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "platforms": ["ios", "android"],
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
