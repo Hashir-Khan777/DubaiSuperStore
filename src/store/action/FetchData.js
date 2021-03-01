@@ -1,4 +1,3 @@
-import axios from "axios";
 import Axios from "axios";
 
 const Fetch_Departments = () => async (dispatch) => {
@@ -67,8 +66,8 @@ const Fetch_Sub_Categories = () => async (dispatch) => {
 const Fetch_Products = () => async (dispatch) => {
   dispatch({ type: "FETCH_PRODUCTS_REQUEST" });
   try {
-    const { data } = await axios.get(
-      "https://www.dubaisuperstore.com.pk/myapi/Product"
+    const { data } = await Axios.get(
+      "https://www.dubaisuperstore.com.pk/myapi/Product?FilterItem=HotProduct&TopRecord=15"
     );
     dispatch({
       type: "FETCH_PRODUCTS_SUCCESS",
@@ -85,9 +84,31 @@ const Fetch_Products = () => async (dispatch) => {
   }
 };
 
+const Fetch_Brands = () => async (dispatch) => {
+  dispatch({ type: "FETCH_BRAND_REQUEST" });
+  try {
+    const { data } = await Axios.get(
+      "https://www.dubaisuperstore.com.pk/myapi/SKUBrand"
+    );
+    dispatch({
+      type: "FETCH_BRAND_SUCCESS",
+      payload: data[0].skuBrandDetail,
+    });
+  } catch (err) {
+    dispatch({
+      type: "FETCH_BRAND_FAIL",
+      payload:
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
+
 export {
   Fetch_Departments,
   Fetch_Categories,
   Fetch_Sub_Categories,
   Fetch_Products,
+  Fetch_Brands,
 };

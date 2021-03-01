@@ -32,7 +32,15 @@ export default function AllProductComponent(props) {
           <TouchableOpacity
             style={styles.cartButton}
             activeOpacity={0.6}
-            onPress={() => props.prop.navigation.navigate("Cart")}
+            onPress={() =>
+              props.prop.navigation.navigate("Cart", {
+                id: props.id,
+                name: props.name,
+                quantity: 1,
+                image: props.image,
+                price: props.price,
+              })
+            }
           >
             <Ionicons name="cart" color="#fff" size={20} />
             <Text style={{ color: "#fff" }}>Add</Text>
@@ -55,6 +63,7 @@ const styles = StyleSheet.create({
   departImage: {
     width: "100%",
     height: 150,
+    resizeMode: "center",
   },
   buttonPrice: {
     display: "flex",

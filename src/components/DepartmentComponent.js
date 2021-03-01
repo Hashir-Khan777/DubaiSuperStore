@@ -6,7 +6,9 @@ export default function DepartmentComponent(props) {
     <View style={styles.card}>
       <TouchableOpacity
         activeOpacity={1}
-        onPress={() => props.prop.navigation.navigate("categories")}
+        onPress={() =>
+          props.prop.navigation.navigate("relatedcategories", { id: props.id })
+        }
       >
         <View>
           <Image

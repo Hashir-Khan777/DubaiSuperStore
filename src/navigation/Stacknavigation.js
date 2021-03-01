@@ -5,8 +5,10 @@ import DrawerNavigation from "./DrawerNavigation";
 import Categories from "../screens/Categories";
 import SubCategories from "../screens/SubCategories";
 import AllProducts from "../screens/AllProducts";
-import AllProductComponent from "../components/AllProductComponent";
 import ProductComponent from "../components/ProductComponent";
+import RelatedCategories from "../screens/RelatedCategories";
+import RelateadSubCategories from "../screens/RelateadSubCategories";
+import Relatedproducts from "../screens/Relatedproducts";
 
 const Stack = createStackNavigator();
 export default function Stacknavigation() {
@@ -50,6 +52,27 @@ export default function Stacknavigation() {
       <Stack.Screen
         name="product"
         component={ProductComponent}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="relatedcategories"
+        component={RelatedCategories}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="relaedsubcategories"
+        component={RelateadSubCategories}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="relatedproducts"
+        component={Relatedproducts}
         options={{
           headerShown: false,
         }}

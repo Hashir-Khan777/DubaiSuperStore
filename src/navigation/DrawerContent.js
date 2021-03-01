@@ -63,13 +63,17 @@ export default function DrawerContent(props) {
           >
             <Text>Show Category</Text>
           </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.6} style={styles.name}>
+          <TouchableOpacity
+            activeOpacity={0.6}
+            style={styles.name}
+            onPress={() => props.navigation.navigate("allDeparts")}
+          >
             <Text>Show Departments</Text>
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.6}
             style={styles.name}
-            onPress={() => props.navigation.navigate("brand")}
+            onPress={() => props.navigation.navigate("Brands")}
           >
             <Text>Show Brand</Text>
           </TouchableOpacity>

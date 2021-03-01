@@ -3,6 +3,7 @@ const INITIAL_STATE = {
   Categories: [],
   SubCategories: [],
   Products: [],
+  Brands: [],
 };
 
 const DepartmentReducer = (state = INITIAL_STATE, action) => {
@@ -101,9 +102,34 @@ const FetchProductsReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
+const FetchBrandReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case "FETCH_BRAND_REQUEST":
+      return {
+        loading: true,
+      };
+
+    case "FETCH_BRAND_SUCCESS":
+      return {
+        loading: false,
+        Brands: action.payload,
+      };
+
+    case "FETCH_BRAND_FAIL":
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
 export {
   DepartmentReducer,
   CategoriesReducer,
   SubCategoriesReducer,
   FetchProductsReducer,
+  FetchBrandReducer,
 };

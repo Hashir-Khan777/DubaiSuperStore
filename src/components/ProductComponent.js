@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
   departImage: {
     width: "100%",
     height: 300,
+    resizeMode: "center",
   },
   departText: {
     margin: 10,

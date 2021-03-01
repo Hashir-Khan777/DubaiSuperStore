@@ -1,5 +1,4 @@
 import { Ionicons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useEffect } from "react";
 import {
   Image,
@@ -8,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
@@ -21,6 +21,22 @@ export default function Cart(props) {
 
   const Cart = useSelector((state) => state.Cart);
   const { cartItems } = Cart;
+
+  console.log(cart);
+
+  const clearItem = (id) => {
+    Alert.alert(
+      "Remove Product",
+      "Are you sure you want to remove product ?",
+      [
+        {
+          text: "Cancel",
+        },
+        { text: "OK", onPress: () => dispatch(Remove_From_Cart(id)) },
+      ],
+      { cancelable: false }
+    );
+  };
 
   useEffect(() => {
     cart &&
@@ -55,55 +71,57 @@ export default function Cart(props) {
             ) : (
               cartItems.map((item) => {
                 return (
-                  <View style={styles.cardView} key={item.name}>
-                    <View>
-                      <Image
-                        style={styles.cardImage}
-                        source={{
-                          uri: item.image,
-                        }}
-                      />
-                    </View>
-                    <View>
+                  <ScrollView key={item.name}>
+                    <View style={styles.cardView}>
                       <View>
-                        <Text
+                        <Image
+                          style={styles.cardImage}
+                          source={{
+                            uri: item.image,
+                          }}
+                        />
+                      </View>
+                      <View>
+                        <View>
+                          <Text
+                            style={{
+                              fontSize: 20,
+                              width: 200,
+                            }}
+                          >
+                            {item.name}
+                          </Text>
+                        </View>
+                        <View
                           style={{
-                            fontSize: 20,
-                            width: 200,
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-evenly",
+                            alignItems: "center",
                           }}
                         >
-                          {item.name}
-                        </Text>
-                      </View>
-                      <View
-                        style={{
-                          display: "flex",
-                          flexDirection: "row",
-                          justifyContent: "space-evenly",
-                          alignItems: "center",
-                        }}
-                      >
-                        <View>
-                          <Text>Qty</Text>
-                          <Text>{item.quantity}</Text>
-                        </View>
-                        <View>
-                          <Text>Price</Text>
-                          <Text>{item.price}</Text>
+                          <View>
+                            <Text>Qty</Text>
+                            <Text>{item.quantity}</Text>
+                          </View>
+                          <View>
+                            <Text>Price</Text>
+                            <Text>{item.price}</Text>
+                          </View>
                         </View>
                       </View>
+                      <View>
+                        <Ionicons
+                          style={{
+                            marginRight: 15,
+                          }}
+                          name="trash-bin"
+                          size={20}
+                          onPress={() => clearItem(item.id)}
+                        />
+                      </View>
                     </View>
-                    <View>
-                      <Ionicons
-                        style={{
-                          marginRight: 15,
-                        }}
-                        name="trash-bin"
-                        size={20}
-                        onPress={() => dispatch(Remove_From_Cart(cart.id))}
-                      />
-                    </View>
-                  </View>
+                  </ScrollView>
                 );
               })
             )}
@@ -142,5 +160,6 @@ const styles = StyleSheet.create({
   cardImage: {
     width: 100,
     height: 100,
+    resizeMode: "center",
   },
 });

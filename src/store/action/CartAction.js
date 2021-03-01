@@ -26,7 +26,10 @@ const Add_To_Cart = (id, name, quantity, image, price) => async (
 };
 
 const Remove_From_Cart = (productId) => async (dispatch, getState) => {
-  await AsyncStorage.setItem("products", JSON.stringify(getState().cart.cartItems));
+  await AsyncStorage.setItem(
+    "products",
+    JSON.stringify(getState().Cart.cartItems)
+  );
   dispatch({ type: "CART_REMOVE_ITEM", payload: productId });
 };
 

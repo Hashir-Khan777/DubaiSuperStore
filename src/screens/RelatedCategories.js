@@ -13,11 +13,15 @@ import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
 import { Fetch_Categories } from "../store/action/FetchData";
 
-export default function Categories(props) {
-  const dispatch = useDispatch();
-
+export default function RelatedCategories(props) {
   const AllCategories = useSelector((state) => state.AllCategories);
   const { loading, error, Categories } = AllCategories;
+
+  const relatedCategories =
+    Categories &&
+    Categories.filter((x) => x.SKUDeptId == props.route.params.id);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(Fetch_Categories());
@@ -26,7 +30,7 @@ export default function Categories(props) {
   return (
     <SafeAreaView>
       <View>
-        <Header name={props.route.name} catprop={props} />
+        <Header name={props.route.name} subcatprop={props} />
         <View>
           <ScrollView>
             <View>
@@ -37,7 +41,7 @@ export default function Categories(props) {
                 ) : error ? (
                   <Text>{error}</Text>
                 ) : (
-                  Categories.map((item) => {
+                  relatedCategories.map((item) => {
                     return (
                       <View style={styles.card} key={item.Name}>
                         <TouchableOpacity

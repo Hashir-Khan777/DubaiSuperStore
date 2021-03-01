@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import {
   ActivityIndicator,
+  Image,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -30,6 +31,14 @@ export default function Departments(props) {
               activeOpacity={0.6}
               onPress={() => props.prop.navigation.navigate("categories")}
             >
+              <Image
+                source={require("../../assets/category.jpg")}
+                style={{
+                  width: 70,
+                  height: 70,
+                  resizeMode: "center",
+                }}
+              />
               <Text>Categories</Text>
             </TouchableOpacity>
           </View>
@@ -38,9 +47,36 @@ export default function Departments(props) {
               activeOpacity={0.6}
               onPress={() => props.prop.navigation.navigate("subcategories")}
             >
+              <Image
+                source={require("../../assets/subcategory.jpg")}
+                style={{
+                  width: 70,
+                  height: 70,
+                  resizeMode: "center",
+                }}
+              />
               <Text>Sub Categories</Text>
             </TouchableOpacity>
           </View>
+        </View>
+
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            resizeMode="center"
+            source={require("../../assets/uploadpre.jpg")}
+            style={{
+              width: "100%",
+              height: 100,
+              resizeMode: "center",
+            }}
+          />
         </View>
 
         <View style={styles.departView}>

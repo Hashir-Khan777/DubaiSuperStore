@@ -6,14 +6,17 @@ import AllProductComponent from "../components/AllProductComponent";
 import Header from "../components/Header";
 import { Fetch_Products } from "../store/action/FetchData";
 
-export default function AllProducts(props) {
+export default function Relatedproducts(props) {
   const dispatch = useDispatch();
 
   const AllProducts = useSelector((state) => state.AllProducts);
   const { loading, error, Products } = AllProducts;
 
-  useEffect(() => {
-    dispatch(Fetch_Products());
+  const relatedProducts =
+    Products && Products.filter((x) => x.SKUSubCatId == props.route.params.id);
+
+  useEffect(async () => {
+    await dispatch(Fetch_Products());
   }, [dispatch]);
 
   return (
@@ -29,7 +32,7 @@ export default function AllProducts(props) {
               ) : error ? (
                 <Text>{error}</Text>
               ) : (
-                Products.map((item) => {
+                relatedProducts.map((item) => {
                   return (
                     <AllProductComponent
                       key={item.RowId}
