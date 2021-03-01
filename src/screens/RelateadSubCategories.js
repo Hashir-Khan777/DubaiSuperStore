@@ -10,12 +10,8 @@ import {
 } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
-import AllProductComponent from "../components/AllProductComponent";
 import Header from "../components/Header";
-import {
-  Fetch_Products,
-  Fetch_Sub_Categories,
-} from "../store/action/FetchData";
+import { Fetch_Sub_Categories } from "../store/action/FetchData";
 
 export default function RelateadSubCategories(props) {
   const dispatch = useDispatch();
@@ -23,19 +19,12 @@ export default function RelateadSubCategories(props) {
   const AllSubCategories = useSelector((state) => state.AllSubCategories);
   const { loading, error, SubCategories } = AllSubCategories;
 
-  const AllProducts = useSelector((state) => state.AllProducts);
-  const { Products } = AllProducts;
-
   const relatedSubCategories =
     SubCategories &&
     SubCategories.filter((x) => x.SKUCatId == props.route.params.id);
 
-  const relatedProducts =
-    Products && Products.filter((x) => x.SKUCatId == props.route.params.id);
-
   useEffect(() => {
     dispatch(Fetch_Sub_Categories());
-    dispatch(Fetch_Products());
   }, [dispatch]);
 
   return (
@@ -44,15 +33,13 @@ export default function RelateadSubCategories(props) {
         <Header name={props.route.name} subprop={props} />
         <View>
           <ScrollView>
-            <Text style={styles.categoryHeading}>
-              {relatedSubCategories ? "Sub Categories" : "Products"}
-            </Text>
+            <Text style={styles.categoryHeading}>Sub Categories</Text>
             <View style={styles.components}>
               {loading ? (
                 <ActivityIndicator size="large" color="#00ff00" />
               ) : error ? (
                 <Text>{error}</Text>
-              ) : relatedSubCategories ? (
+              ) : (
                 relatedSubCategories.map((item) => {
                   return (
                     <View style={styles.card} key={item.Name}>
@@ -76,20 +63,6 @@ export default function RelateadSubCategories(props) {
                           <Text style={styles.departText}>{item.Name}</Text>
                         </View>
                       </TouchableOpacity>
-                    </View>
-                  );
-                })
-              ) : (
-                relatedProducts.map((item) => {
-                  return (
-                    <View style={styles.card} key={item.Name}>
-                      <AllProductComponent
-                        id={item.SKUSubCatId}
-                        prop={props}
-                        image={item.ImageUrl1}
-                        name={item.Name}
-                        price={item.SalePrice}
-                      />
                     </View>
                   );
                 })

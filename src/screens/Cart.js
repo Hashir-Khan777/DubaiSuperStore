@@ -22,8 +22,6 @@ export default function Cart(props) {
   const Cart = useSelector((state) => state.Cart);
   const { cartItems } = Cart;
 
-  console.log(cart);
-
   const clearItem = (id) => {
     Alert.alert(
       "Remove Product",
@@ -72,55 +70,68 @@ export default function Cart(props) {
               cartItems.map((item) => {
                 return (
                   <ScrollView key={item.name}>
-                    <View style={styles.cardView}>
-                      <View>
-                        <Image
-                          style={styles.cardImage}
-                          source={{
-                            uri: item.image,
-                          }}
-                        />
-                      </View>
-                      <View>
+                    <TouchableOpacity
+                      activeOpacity={1}
+                      onPress={() =>
+                        props.navigation.navigate("product", {
+                          name: item.name,
+                          image: item.image,
+                          price: item.price,
+                          id: item.id,
+                          quantity: item.quantity,
+                        })
+                      }
+                    >
+                      <View style={styles.cardView}>
                         <View>
-                          <Text
+                          <Image
+                            style={styles.cardImage}
+                            source={{
+                              uri: item.image,
+                            }}
+                          />
+                        </View>
+                        <View>
+                          <View>
+                            <Text
+                              style={{
+                                fontSize: 20,
+                                width: 200,
+                              }}
+                            >
+                              {item.name}
+                            </Text>
+                          </View>
+                          <View
                             style={{
-                              fontSize: 20,
-                              width: 200,
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "space-evenly",
+                              alignItems: "center",
                             }}
                           >
-                            {item.name}
-                          </Text>
-                        </View>
-                        <View
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            justifyContent: "space-evenly",
-                            alignItems: "center",
-                          }}
-                        >
-                          <View>
-                            <Text>Qty</Text>
-                            <Text>{item.quantity}</Text>
-                          </View>
-                          <View>
-                            <Text>Price</Text>
-                            <Text>{item.price}</Text>
+                            <View>
+                              <Text>Qty</Text>
+                              <Text>{item.quantity}</Text>
+                            </View>
+                            <View>
+                              <Text>Price</Text>
+                              <Text>{item.price}</Text>
+                            </View>
                           </View>
                         </View>
+                        <View>
+                          <Ionicons
+                            style={{
+                              marginRight: 15,
+                            }}
+                            name="trash-bin"
+                            size={20}
+                            onPress={() => clearItem(item.id)}
+                          />
+                        </View>
                       </View>
-                      <View>
-                        <Ionicons
-                          style={{
-                            marginRight: 15,
-                          }}
-                          name="trash-bin"
-                          size={20}
-                          onPress={() => clearItem(item.id)}
-                        />
-                      </View>
-                    </View>
+                    </TouchableOpacity>
                   </ScrollView>
                 );
               })

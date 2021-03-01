@@ -13,7 +13,7 @@ import { ScrollView } from "react-native-gesture-handler";
 export default function ProductComponent(props) {
   const product = props.route.params;
 
-  const [qty, setQty] = useState("1");
+  const [qty, setQty] = useState(product.quantity ? product.quantity : "1");
 
   return (
     <SafeAreaView>
