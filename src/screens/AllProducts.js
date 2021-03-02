@@ -12,6 +12,8 @@ export default function AllProducts(props) {
   const AllProducts = useSelector((state) => state.AllProducts);
   const { loading, error, Products } = AllProducts;
 
+  Products && (Products.length = 50);
+
   useEffect(() => {
     dispatch(Fetch_Products());
   }, [dispatch]);

@@ -67,7 +67,7 @@ const Fetch_Products = () => async (dispatch) => {
   dispatch({ type: "FETCH_PRODUCTS_REQUEST" });
   try {
     const { data } = await Axios.get(
-      "https://www.dubaisuperstore.com.pk/myapi/Product?FilterItem=HotProduct&TopRecord=15"
+      "https://www.dubaisuperstore.com.pk/myapi/Product"
     );
     dispatch({
       type: "FETCH_PRODUCTS_SUCCESS",
@@ -96,7 +96,7 @@ const Fetch_Brands = () => async (dispatch) => {
     });
   } catch (err) {
     dispatch({
-      type: "FETCH_BRAND_FAIL",
+      type: "FETCH_PRODUCTS_FAIL",
       payload:
         err.response && err.response.data.message
           ? err.response.data.message

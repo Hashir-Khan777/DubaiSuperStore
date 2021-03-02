@@ -1,22 +1,23 @@
 import React from "react";
 import { View, Image, FlatList, Dimensions } from "react-native";
+import banner1 from "../../assets/banner1.jpg";
+import banner2 from "../../assets/banner2.jpg";
+import banner3 from "../../assets/banner3.jpg";
+
 export default function Slider() {
   const { width: windowWidth } = Dimensions.get("window");
   const Images = [
     {
       id: 1,
-      image:
-        "https://www.dubaisuperstore.com.pk/Images/Uploaded/2395SKU_download (1).jpg",
+      image: banner1,
     },
     {
       id: 2,
-      image:
-        "https://www.dubaisuperstore.com.pk/Images/Uploaded/2395SKU_download (1).jpg",
+      image: banner2,
     },
     {
       id: 3,
-      image:
-        "https://www.dubaisuperstore.com.pk/Images/Uploaded/2395SKU_download (1).jpg",
+      image: banner3,
     },
   ];
 
@@ -29,14 +30,14 @@ export default function Slider() {
       <FlatList
         pagingEnabled
         horizontal
-        onScroll={(event) => console.log( event.nativeEvent.layoutMeasurement.width)}
         showsHorizontalScrollIndicator={false}
         data={Images}
+        automaticallyAdjustContentInsets={true}
         renderItem={({ item }) => {
           return (
             <Image
               key={item.id}
-              source={{ uri: item.image }}
+              source={item.image}
               style={{
                 flex: 1,
                 width: windowWidth,

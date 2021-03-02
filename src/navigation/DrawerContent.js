@@ -22,9 +22,13 @@ export default function DrawerContent(props) {
           <View>
             <Text style={styles.avatarText}>Hello, Guest</Text>
             <View style={styles.avatarLogin}>
-              <TouchableOpacity activeOpacity={0.6}>
-                <Text style={styles.avatarLink}>Login /</Text>
+              <TouchableOpacity
+                activeOpacity={0.6}
+                onPress={() => props.navigation.navigate("login")}
+              >
+                <Text style={styles.avatarLink}>Login</Text>
               </TouchableOpacity>
+              <Text style={{ color: "#fff" }}> / </Text>
               <TouchableOpacity activeOpacity={0.6}>
                 <Text style={styles.avatarLink}>Sign up</Text>
               </TouchableOpacity>

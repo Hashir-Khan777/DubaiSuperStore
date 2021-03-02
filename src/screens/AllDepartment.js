@@ -43,7 +43,7 @@ export default function AllDepartment(props) {
                   return (
                     <DepartmentComponent
                       key={item.Name}
-                      prop={props.prop}
+                      prop={props}
                       name={item.Name}
                       id={item.SKUDeptId}
                       image={item.ImageUrl1}

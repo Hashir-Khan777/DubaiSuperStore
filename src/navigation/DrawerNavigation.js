@@ -10,6 +10,7 @@ import RelatedCategories from "../screens/RelatedCategories";
 import RelateadSubCategories from "../screens/RelateadSubCategories";
 import AllBrands from "../screens/AllBrands";
 import AllDepartment from "../screens/AllDepartment";
+import Login from "../screens/Login";
 
 const Drawer = createDrawerNavigator();
 export default function DrawerNavigation() {
@@ -30,6 +31,7 @@ export default function DrawerNavigation() {
       />
       <Drawer.Screen name="Brands" component={AllBrands} />
       <Drawer.Screen name="allDeparts" component={AllDepartment} />
+      <Drawer.Screen name="login" component={Login} />
     </Drawer.Navigator>
   );
 }

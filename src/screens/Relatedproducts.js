@@ -12,6 +12,8 @@ export default function Relatedproducts(props) {
   const AllProducts = useSelector((state) => state.AllProducts);
   const { loading, error, Products } = AllProducts;
 
+  Products && (Products.length = 30);
+
   const relatedProducts =
     Products && Products.filter((x) => x.SKUSubCatId == props.route.params.id);
 
