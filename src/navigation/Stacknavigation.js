@@ -9,6 +9,8 @@ import ProductComponent from "../components/ProductComponent";
 import RelatedCategories from "../screens/RelatedCategories";
 import RelateadSubCategories from "../screens/RelateadSubCategories";
 import Relatedproducts from "../screens/Relatedproducts";
+import Checkout from "../screens/Checkout";
+import PlaceOrder from "../screens/PlaceOrder";
 
 const Stack = createStackNavigator();
 export default function Stacknavigation() {
@@ -73,6 +75,20 @@ export default function Stacknavigation() {
       <Stack.Screen
         name="relatedproducts"
         component={Relatedproducts}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="checkout"
+        component={Checkout}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="placeOrder"
+        component={PlaceOrder}
         options={{
           headerShown: false,
         }}

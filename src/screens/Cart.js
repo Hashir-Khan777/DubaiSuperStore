@@ -44,101 +44,123 @@ export default function Cart(props) {
   }, [dispatch]);
 
   return (
-    <SafeAreaView>
-      <View>
-        <Header name={props.route.name} cartProp={props} />
+    <SafeAreaView style={{ flex: 1, flexDirection: "column" }}>
+      <Header name={props.route.name} cartProp={props} />
+      <ScrollView>
         <View>
-          <ScrollView>
-            {cartItems.length <= 0 ? (
-              <View>
-                <View style={styles.cartContainer}>
-                  <Text style={styles.cartEmptyText}>Cart is Empty</Text>
-                </View>
-                <View>
-                  <TouchableOpacity
-                    activeOpacity={0.6}
-                    style={styles.cartEmptyButton}
-                    onPress={() => props.navigation.navigate("Home")}
-                  >
-                    <Text style={styles.cartEmptyButtonText}>
-                      Continue Shopping
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+          {cartItems.length <= 0 ? (
+            <View>
+              <View style={styles.cartContainer}>
+                <Text style={styles.cartEmptyText}>Cart is Empty</Text>
               </View>
-            ) : (
-              cartItems.map((item) => {
-                return (
-                  <ScrollView key={item.name}>
-                    <TouchableOpacity
-                      activeOpacity={1}
-                      onPress={() =>
-                        props.navigation.navigate("product", {
-                          name: item.name,
-                          image: item.image,
-                          price: item.price,
-                          id: item.id,
-                          quantity: item.quantity,
-                        })
-                      }
-                    >
-                      <View style={styles.cardView}>
+              <View>
+                <TouchableOpacity
+                  activeOpacity={0.6}
+                  style={styles.cartEmptyButton}
+                  onPress={() => props.navigation.navigate("Home")}
+                >
+                  <Text style={styles.cartEmptyButtonText}>
+                    Continue Shopping
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ) : (
+            cartItems.map((item) => {
+              return (
+                <TouchableOpacity
+                  key={item.id}
+                  activeOpacity={1}
+                  onPress={() =>
+                    props.navigation.navigate("product", {
+                      name: item.name,
+                      image: item.image,
+                      price: item.price,
+                      id: item.id,
+                      quantity: item.quantity,
+                    })
+                  }
+                  style={{ flex: 1, height: "100%" }}
+                >
+                  <View style={styles.cardView}>
+                    <View>
+                      <Image
+                        style={styles.cardImage}
+                        source={{
+                          uri: item.image,
+                        }}
+                      />
+                    </View>
+                    <View>
+                      <View>
+                        <Text
+                          style={{
+                            fontSize: 20,
+                            width: 200,
+                          }}
+                        >
+                          {item.name}
+                        </Text>
+                      </View>
+                      <View
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          justifyContent: "space-evenly",
+                          alignItems: "center",
+                        }}
+                      >
                         <View>
-                          <Image
-                            style={styles.cardImage}
-                            source={{
-                              uri: item.image,
-                            }}
-                          />
+                          <Text>Qty</Text>
+                          <Text>{item.quantity}</Text>
                         </View>
                         <View>
-                          <View>
-                            <Text
-                              style={{
-                                fontSize: 20,
-                                width: 200,
-                              }}
-                            >
-                              {item.name}
-                            </Text>
-                          </View>
-                          <View
-                            style={{
-                              display: "flex",
-                              flexDirection: "row",
-                              justifyContent: "space-evenly",
-                              alignItems: "center",
-                            }}
-                          >
-                            <View>
-                              <Text>Qty</Text>
-                              <Text>{item.quantity}</Text>
-                            </View>
-                            <View>
-                              <Text>Price</Text>
-                              <Text>{item.price}</Text>
-                            </View>
-                          </View>
-                        </View>
-                        <View>
-                          <Ionicons
-                            style={{
-                              marginRight: 15,
-                            }}
-                            name="trash-bin"
-                            size={20}
-                            onPress={() => clearItem(item.id)}
-                          />
+                          <Text>Price</Text>
+                          <Text>{item.price}</Text>
                         </View>
                       </View>
-                    </TouchableOpacity>
-                  </ScrollView>
-                );
-              })
-            )}
-          </ScrollView>
+                    </View>
+                    <View>
+                      <Ionicons
+                        style={{
+                          marginRight: 15,
+                        }}
+                        name="trash-bin"
+                        size={20}
+                        onPress={() => clearItem(item.id)}
+                      />
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              );
+            })
+          )}
         </View>
-      </View>
+      </ScrollView>
+      {cartItems && cartItems.length >= 1 && (
+        <View style={styles.checkout}>
+          <View
+            style={{
+              width: "40%",
+              borderRightColor: "#fff",
+              borderRightWidth: 1,
+            }}
+          >
+            <Text style={{ color: "#fff" }}>Total</Text>
+            <Text style={{ color: "#fff" }}>
+              Rs. {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+            </Text>
+          </View>
+          <View>
+            <TouchableOpacity
+              activeOpacity={0.6}
+              onPress={() => props.navigation.navigate("checkout")}
+            >
+              <Text style={{ color: "#fff" }}>CHECKOUT</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
@@ -172,5 +194,12 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     resizeMode: "center",
+  },
+  checkout: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 25,
+    backgroundColor: "#000",
   },
 });

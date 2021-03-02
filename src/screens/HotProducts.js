@@ -4,104 +4,24 @@ import {
   View,
   Text,
   Image,
-  FlatList,
   TouchableOpacity,
   StyleSheet,
+  ScrollView,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { Fetch_Products } from "../store/action/FetchData";
 
 export default function HotProducts(props) {
-  const data = [
-    {
-      id: 1,
-      product: {
-        iamge:
-          "https://www.dubaisuperstore.com.pk/Images/Uploaded/2547SKU_8964000074732.jpg",
-        name: "ADAMS SANDWITCH CHEESE 200G",
-        price: 340,
-        id: 10,
-      },
-    },
-    {
-      id: 2,
-      product: {
-        iamge:
-          "https://www.dubaisuperstore.com.pk/Images/Uploaded/2547SKU_8964000074732.jpg",
-        name: "ADAMS SANDWITCH CHEESE 200G",
-        price: 340,
-        id: 10,
-      },
-    },
-    {
-      id: 3,
-      product: {
-        iamge:
-          "https://www.dubaisuperstore.com.pk/Images/Uploaded/2547SKU_8964000074732.jpg",
-        name: "ADAMS SANDWITCH CHEESE 200G",
-        price: 340,
-        id: 10,
-      },
-    },
-    {
-      id: 4,
-      product: {
-        iamge:
-          "https://www.dubaisuperstore.com.pk/Images/Uploaded/2547SKU_8964000074732.jpg",
-        name: "ADAMS SANDWITCH CHEESE 200G",
-        price: 340,
-        id: 10,
-      },
-    },
-    {
-      id: 5,
-      product: {
-        iamge:
-          "https://www.dubaisuperstore.com.pk/Images/Uploaded/2547SKU_8964000074732.jpg",
-        name: "ADAMS SANDWITCH CHEESE 200G",
-        price: 340,
-        id: 10,
-      },
-    },
-    {
-      id: 6,
-      product: {
-        iamge:
-          "https://www.dubaisuperstore.com.pk/Images/Uploaded/2547SKU_8964000074732.jpg",
-        name: "ADAMS SANDWITCH CHEESE 200G",
-        price: 340,
-        id: 10,
-      },
-    },
-    {
-      id: 7,
-      product: {
-        iamge:
-          "https://www.dubaisuperstore.com.pk/Images/Uploaded/2547SKU_8964000074732.jpg",
-        name: "ADAMS SANDWITCH CHEESE 200G",
-        price: 340,
-        id: 10,
-      },
-    },
-    {
-      id: 8,
-      product: {
-        iamge:
-          "https://www.dubaisuperstore.com.pk/Images/Uploaded/2547SKU_8964000074732.jpg",
-        name: "ADAMS SANDWITCH CHEESE 200G",
-        price: 340,
-        id: 10,
-      },
-    },
-    {
-      id: 9,
-      product: {
-        iamge:
-          "https://www.dubaisuperstore.com.pk/Images/Uploaded/2547SKU_8964000074732.jpg",
-        name: "ADAMS SANDWITCH CHEESE 200G",
-        price: 340,
-        id: 10,
-      },
-    },
-  ];
+  const dispatch = useDispatch();
+
+  const AllProducts = useSelector((state) => state.AllProducts);
+  const { loading, error, Products } = AllProducts;
+
+  Products && (Products.length = 17);
+
+  useEffect(() => {
+    dispatch(Fetch_Products());
+  }, [dispatch]);
 
   return (
     <View style={{ marginVertical: 30 }}>
@@ -126,59 +46,60 @@ export default function HotProducts(props) {
           Hot Products
         </Text>
         <View>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            renderItem={({ item }) => {
-              return (
-                <View style={styles.card}>
-                  <TouchableOpacity
-                    activeOpacity={1}
-                    onPress={() =>
-                      props.prop.navigation.navigate("product", {
-                        image: item.product.iamge,
-                        name: item.product.name,
-                        price: item.product.price,
-                        id: item.product.id,
-                      })
-                    }
-                  >
-                    <Image
-                      source={{ uri: item.product.iamge }}
-                      style={{
-                        flex: 1,
-                        height: 100,
-                        resizeMode: "center",
-                      }}
-                    />
-                  </TouchableOpacity>
-                  <Text style={styles.description}>{item.product.name}</Text>
-                  <View style={styles.buttonPrice}>
-                    <View>
-                      <Text style={styles.price}>{item.product.price}</Text>
-                    </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {loading ? null : error ? (
+              <Text>{error}</Text>
+            ) : (
+              Products.map((item) => {
+                return (
+                  <View style={styles.card} key={item.RowId}>
                     <TouchableOpacity
-                      style={styles.cartButton}
-                      activeOpacity={0.6}
+                      activeOpacity={1}
                       onPress={() =>
-                        props.prop.navigation.navigate("Cart", {
-                          name: item.product.name,
-                          price: item.product.price,
-                          image: item.product.iamge,
-                          quantity: 1,
-                          id: item.id,
+                        props.prop.navigation.navigate("product", {
+                          image: item.SKUImageURL1,
+                          name: item.SKUName,
+                          price: item.SalePrice,
+                          id: item.RowId,
                         })
                       }
                     >
-                      <Ionicons name="cart" color="#fff" size={20} />
-                      <Text style={{ color: "#fff" }}>Add</Text>
+                      <Image
+                        source={{ uri: item.SKUImageURL1 }}
+                        style={{
+                          flex: 1,
+                          height: 100,
+                          resizeMode: "center",
+                        }}
+                      />
                     </TouchableOpacity>
+                    <Text style={styles.description}>{item.SKUName}</Text>
+                    <View style={styles.buttonPrice}>
+                      <View>
+                        <Text style={styles.price}>{item.SalePrice}</Text>
+                      </View>
+                      <TouchableOpacity
+                        style={styles.cartButton}
+                        activeOpacity={0.6}
+                        onPress={() =>
+                          props.prop.navigation.navigate("Cart", {
+                            image: item.SKUImageURL1,
+                            name: item.SKUName,
+                            price: item.SalePrice,
+                            id: item.RowId,
+                            quantity: 1,
+                          })
+                        }
+                      >
+                        <Ionicons name="cart" color="#fff" size={20} />
+                        <Text style={{ color: "#fff" }}>Add</Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
-                </View>
-              );
-            }}
-          />
+                );
+              })
+            )}
+          </ScrollView>
         </View>
       </View>
 
@@ -195,59 +116,60 @@ export default function HotProducts(props) {
           Sale Products
         </Text>
         <View>
-          <FlatList
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            data={data}
-            renderItem={({ item }) => {
-              return (
-                <View style={styles.card}>
-                  <TouchableOpacity
-                    activeOpacity={1}
-                    onPress={() =>
-                      props.prop.navigation.navigate("product", {
-                        image: item.product.iamge,
-                        name: item.product.name,
-                        price: item.product.price,
-                        id: item.product.id,
-                      })
-                    }
-                  >
-                    <Image
-                      source={{ uri: item.product.iamge }}
-                      style={{
-                        flex: 1,
-                        height: 100,
-                        resizeMode: "center",
-                      }}
-                    />
-                  </TouchableOpacity>
-                  <Text style={styles.description}>{item.product.name}</Text>
-                  <View style={styles.buttonPrice}>
-                    <View>
-                      <Text style={styles.price}>{item.product.price}</Text>
-                    </View>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {loading ? null : error ? (
+              <Text>{error}</Text>
+            ) : (
+              Products.map((item) => {
+                return (
+                  <View style={styles.card} key={item.RowId}>
                     <TouchableOpacity
-                      style={styles.cartButton}
-                      activeOpacity={0.6}
+                      activeOpacity={1}
                       onPress={() =>
-                        props.prop.navigation.navigate("Cart", {
-                          name: item.product.name,
-                          price: item.product.price,
-                          image: item.product.iamge,
-                          quantity: 1,
-                          id: item.id,
+                        props.prop.navigation.navigate("product", {
+                          image: item.SKUImageURL1,
+                          name: item.SKUName,
+                          price: item.SalePrice,
+                          id: item.RowId,
                         })
                       }
                     >
-                      <Ionicons name="cart" color="#fff" size={20} />
-                      <Text style={{ color: "#fff" }}>Add</Text>
+                      <Image
+                        source={{ uri: item.SKUImageURL1 }}
+                        style={{
+                          flex: 1,
+                          height: 100,
+                          resizeMode: "center",
+                        }}
+                      />
                     </TouchableOpacity>
+                    <Text style={styles.description}>{item.SKUName}</Text>
+                    <View style={styles.buttonPrice}>
+                      <View>
+                        <Text style={styles.price}>{item.SalePrice}</Text>
+                      </View>
+                      <TouchableOpacity
+                        style={styles.cartButton}
+                        activeOpacity={0.6}
+                        onPress={() =>
+                          props.prop.navigation.navigate("Cart", {
+                            image: item.SKUImageURL1,
+                            name: item.SKUName,
+                            price: item.SalePrice,
+                            id: item.RowId,
+                            quantity: 1,
+                          })
+                        }
+                      >
+                        <Ionicons name="cart" color="#fff" size={20} />
+                        <Text style={{ color: "#fff" }}>Add</Text>
+                      </TouchableOpacity>
+                    </View>
                   </View>
-                </View>
-              );
-            }}
-          />
+                );
+              })
+            )}
+          </ScrollView>
         </View>
       </View>
     </View>
