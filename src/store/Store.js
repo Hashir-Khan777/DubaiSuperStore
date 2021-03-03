@@ -7,6 +7,7 @@ import {
   FetchBrandReducer,
   FetchProductsReducer,
   SubCategoriesReducer,
+  FetchAreaReducer,
 } from "./reducer/FetchDataReducer";
 
 const reducer = combineReducers({
@@ -16,6 +17,7 @@ const reducer = combineReducers({
   AllProducts: FetchProductsReducer,
   Cart: CartReducer,
   AllBrands: FetchBrandReducer,
+  AllAreas: FetchAreaReducer,
 });
 
 const Store = createStore(reducer, compose(applyMiddleware(thunk)));

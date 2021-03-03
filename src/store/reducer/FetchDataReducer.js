@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   SubCategories: [],
   Products: [],
   Brands: [],
+  Areas: []
 };
 
 const DepartmentReducer = (state = INITIAL_STATE, action) => {
@@ -126,10 +127,35 @@ const FetchBrandReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
+const FetchAreaReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case "FETCH_AREA_REQUEST":
+      return {
+        loading: true,
+      };
+
+    case "FETCH_AREA_SUCCESS":
+      return {
+        loading: false,
+        Areas: action.payload,
+      };
+
+    case "FETCH_AREA_FAIL":
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
 export {
   DepartmentReducer,
   CategoriesReducer,
   SubCategoriesReducer,
   FetchProductsReducer,
   FetchBrandReducer,
+  FetchAreaReducer,
 };

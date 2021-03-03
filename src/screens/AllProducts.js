@@ -1,10 +1,16 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  SafeAreaView,
+  ActivityIndicator,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import AllProductComponent from "../components/AllProductComponent";
 import Header from "../components/Header";
-import { Fetch_Products } from "../store/action/FetchData";
+import { Fetch_All_Products } from "../store/action/FetchData";
 
 export default function AllProducts(props) {
   const dispatch = useDispatch();
@@ -12,10 +18,8 @@ export default function AllProducts(props) {
   const AllProducts = useSelector((state) => state.AllProducts);
   const { loading, error, Products } = AllProducts;
 
-  Products && (Products.length = 50);
-
   useEffect(() => {
-    dispatch(Fetch_Products());
+    dispatch(Fetch_All_Products());
   }, [dispatch]);
 
   return (

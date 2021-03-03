@@ -41,7 +41,11 @@ export default function SubCategories(props) {
                     <View style={styles.card} key={item.Name}>
                       <TouchableOpacity
                         activeOpacity={1}
-                        onPress={() => props.navigation.navigate("allproducts")}
+                        onPress={() =>
+                          props.navigation.navigate("relatedproducts", {
+                            id: item.SKUSubCatId,
+                          })
+                        }
                       >
                         <View>
                           <Image

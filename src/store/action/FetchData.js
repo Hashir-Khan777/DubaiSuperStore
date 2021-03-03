@@ -1,3 +1,4 @@
+import axios from "axios";
 import Axios from "axios";
 
 const Fetch_Departments = () => async (dispatch) => {
@@ -63,7 +64,7 @@ const Fetch_Sub_Categories = () => async (dispatch) => {
   }
 };
 
-const Fetch_Products = () => async (dispatch) => {
+const Fetch_All_Products = () => async (dispatch) => {
   dispatch({ type: "FETCH_PRODUCTS_REQUEST" });
   try {
     const { data } = await Axios.get(
@@ -96,7 +97,28 @@ const Fetch_Brands = () => async (dispatch) => {
     });
   } catch (err) {
     dispatch({
-      type: "FETCH_PRODUCTS_FAIL",
+      type: "FETCH_BRAND_FAIL",
+      payload:
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message,
+    });
+  }
+};
+
+const Fetch_Areas = () => async (dispatch) => {
+  dispatch({ type: "FETCH_AREA_REQUEST" });
+  try {
+    const { data } = await Axios.get(
+      "https://www.dubaisuperstore.com.pk/myapi/area"
+    );
+    dispatch({
+      type: "FETCH_AREA_SUCCESS",
+      payload: data[0].areaDetail,
+    });
+  } catch (err) {
+    dispatch({
+      type: "FETCH_AREA_FAIL",
       payload:
         err.response && err.response.data.message
           ? err.response.data.message
@@ -109,6 +131,7 @@ export {
   Fetch_Departments,
   Fetch_Categories,
   Fetch_Sub_Categories,
-  Fetch_Products,
+  Fetch_All_Products,
   Fetch_Brands,
+  Fetch_Areas,
 };

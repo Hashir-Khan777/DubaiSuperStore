@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Constants from "expo-constants";
 import {
   View,
@@ -8,11 +8,21 @@ import {
   StyleSheet,
   SafeAreaView,
   TouchableOpacity,
+  ActivityIndicator,
+  ScrollView,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { Fetch_Areas } from "../store/action/FetchData";
 
 export default function Checkout(props) {
-  const [makli, setMakli] = useState(100);
-  const [thatta, setThatta] = useState(200);
+  const AllAreas = useSelector((state) => state.AllAreas);
+  const { loading, error, Areas } = AllAreas;
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(Fetch_Areas());
+  }, [dispatch]);
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -54,42 +64,38 @@ export default function Checkout(props) {
             <Ionicons style={styles.searchBarIcon} name="search" size={23} />
           </View>
           <View>
-            <TouchableOpacity
-              activeOpacity={1}
-              onPress={() =>
-                props.navigation.navigate("placeOrder", { price: makli })
-              }
-            >
-              <Text
-                style={{
-                  marginTop: 15,
-                  backgroundColor: "#fff",
-                  padding: 10,
-                  elevation: 5,
-                  marginHorizontal: 10,
-                }}
-              >
-                MAkli {makli}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              activeOpacity={1}
-              onPress={() =>
-                props.navigation.navigate("placeOrder", { price: thatta })
-              }
-            >
-              <Text
-                style={{
-                  marginTop: 15,
-                  backgroundColor: "#fff",
-                  padding: 10,
-                  elevation: 5,
-                  marginHorizontal: 10,
-                }}
-              >
-                Thatta {thatta}
-              </Text>
-            </TouchableOpacity>
+            {loading ? (
+              <ActivityIndicator size="large" color="#00ff00" />
+            ) : error ? (
+              <Text>{error}</Text>
+            ) : (
+              Areas.map((area) => {
+                return (
+                  <TouchableOpacity
+                    key={area.AreaId}
+                    activeOpacity={1}
+                    onPress={() =>
+                      props.navigation.navigate("placeOrder", {
+                        name: area.Name,
+                        price: area.DeliveryCharges,
+                      })
+                    }
+                  >
+                    <Text
+                      style={{
+                        marginTop: 15,
+                        backgroundColor: "#fff",
+                        padding: 10,
+                        elevation: 5,
+                        marginHorizontal: 10,
+                      }}
+                    >
+                      {area.Name} ({area.DeliveryCharges})
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })
+            )}
           </View>
         </View>
       </View>

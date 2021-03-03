@@ -4,7 +4,7 @@ import { ActivityIndicator } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import AllProductComponent from "../components/AllProductComponent";
 import Header from "../components/Header";
-import { Fetch_Products } from "../store/action/FetchData";
+import { Fetch_All_Products } from "../store/action/FetchData";
 
 export default function Relatedproducts(props) {
   const dispatch = useDispatch();
@@ -12,13 +12,11 @@ export default function Relatedproducts(props) {
   const AllProducts = useSelector((state) => state.AllProducts);
   const { loading, error, Products } = AllProducts;
 
-  Products && (Products.length = 30);
-
   const relatedProducts =
     Products && Products.filter((x) => x.SKUSubCatId == props.route.params.id);
 
-  useEffect(async () => {
-    await dispatch(Fetch_Products());
+  useEffect(() => {
+    dispatch(Fetch_All_Products());
   }, [dispatch]);
 
   return (
@@ -37,8 +35,8 @@ export default function Relatedproducts(props) {
                 relatedProducts.map((item) => {
                   return (
                     <AllProductComponent
-                      key={item.RowId}
                       prop={props}
+                      key={item.RowId}
                       name={item.SKUName}
                       image={item.SKUImageURL1}
                       price={item.SalePrice}

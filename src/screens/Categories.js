@@ -25,10 +25,10 @@ export default function Categories(props) {
 
   return (
     <SafeAreaView>
-      <View>
-        <Header name={props.route.name} catprop={props} />
+      <Header name={props.route.name} catprop={props} />
+      <ScrollView style={{ marginBottom: 100 }}>
         <View>
-          <ScrollView>
+          <View>
             <View>
               <Text style={styles.categoryHeading}>Categories</Text>
               <View style={styles.components}>
@@ -66,9 +66,9 @@ export default function Categories(props) {
                 )}
               </View>
             </View>
-          </ScrollView>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

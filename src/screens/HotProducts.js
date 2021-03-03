@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import { Fetch_Products } from "../store/action/FetchData";
+import { Fetch_All_Products } from "../store/action/FetchData";
 
 export default function HotProducts(props) {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ export default function HotProducts(props) {
   Products && (Products.length = 17);
 
   useEffect(() => {
-    dispatch(Fetch_Products());
+    dispatch(Fetch_All_Products());
   }, [dispatch]);
 
   return (
