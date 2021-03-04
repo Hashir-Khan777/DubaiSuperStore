@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import { Add_To_Cart } from "../store/action/CartAction";
 import { Fetch_All_Products } from "../store/action/FetchData";
 
 export default function HotProducts(props) {
@@ -82,13 +83,15 @@ export default function HotProducts(props) {
                         style={styles.cartButton}
                         activeOpacity={0.6}
                         onPress={() =>
-                          props.prop.navigation.navigate("Cart", {
-                            image: item.SKUImageURL1,
-                            name: item.SKUName,
-                            price: item.SalePrice,
-                            id: item.RowId,
-                            quantity: 1,
-                          })
+                          dispatch(
+                            Add_To_Cart(
+                              item.RowId,
+                              item.SKUName,
+                              1,
+                              item.SKUImageURL1,
+                              item.SalePrice
+                            )
+                          )
                         }
                       >
                         <Ionicons name="cart" color="#fff" size={20} />
@@ -152,13 +155,15 @@ export default function HotProducts(props) {
                         style={styles.cartButton}
                         activeOpacity={0.6}
                         onPress={() =>
-                          props.prop.navigation.navigate("Cart", {
-                            image: item.SKUImageURL1,
-                            name: item.SKUName,
-                            price: item.SalePrice,
-                            id: item.RowId,
-                            quantity: 1,
-                          })
+                          dispatch(
+                            Add_To_Cart(
+                              item.RowId,
+                              item.SKUName,
+                              1,
+                              item.SKUImageURL1,
+                              item.SalePrice
+                            )
+                          )
                         }
                       >
                         <Ionicons name="cart" color="#fff" size={20} />

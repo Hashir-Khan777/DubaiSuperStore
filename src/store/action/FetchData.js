@@ -1,10 +1,9 @@
 import axios from "axios";
-import Axios from "axios";
 
 const Fetch_Departments = () => async (dispatch) => {
   dispatch({ type: "FETCH_DEPARTMENT_REQUEST" });
   try {
-    const { data } = await Axios.get(
+    const { data } = await axios.get(
       "https://www.dubaisuperstore.com.pk/myapi/SKUDepartment"
     );
     dispatch({
@@ -25,7 +24,7 @@ const Fetch_Departments = () => async (dispatch) => {
 const Fetch_Categories = () => async (dispatch) => {
   dispatch({ type: "FETCH_CATEGORIES_REQUEST" });
   try {
-    const { data } = await Axios.get(
+    const { data } = await axios.get(
       "https://www.dubaisuperstore.com.pk/myapi/SkuCategory"
     );
     dispatch({
@@ -46,7 +45,7 @@ const Fetch_Categories = () => async (dispatch) => {
 const Fetch_Sub_Categories = () => async (dispatch) => {
   dispatch({ type: "FETCH_SUB_CATEGORIES_REQUEST" });
   try {
-    const { data } = await Axios.get(
+    const { data } = await axios.get(
       "https://www.dubaisuperstore.com.pk/myapi/SkuSubCategory"
     );
     dispatch({
@@ -67,7 +66,7 @@ const Fetch_Sub_Categories = () => async (dispatch) => {
 const Fetch_All_Products = () => async (dispatch) => {
   dispatch({ type: "FETCH_PRODUCTS_REQUEST" });
   try {
-    const { data } = await Axios.get(
+    const { data } = await axios.get(
       "https://www.dubaisuperstore.com.pk/myapi/Product"
     );
     dispatch({
@@ -82,13 +81,13 @@ const Fetch_All_Products = () => async (dispatch) => {
           ? err.response.data.message
           : err.message,
     });
-  }
+  } 
 };
 
 const Fetch_Brands = () => async (dispatch) => {
   dispatch({ type: "FETCH_BRAND_REQUEST" });
   try {
-    const { data } = await Axios.get(
+    const { data } = await axios.get(
       "https://www.dubaisuperstore.com.pk/myapi/SKUBrand"
     );
     dispatch({
@@ -109,7 +108,7 @@ const Fetch_Brands = () => async (dispatch) => {
 const Fetch_Areas = () => async (dispatch) => {
   dispatch({ type: "FETCH_AREA_REQUEST" });
   try {
-    const { data } = await Axios.get(
+    const { data } = await axios.get(
       "https://www.dubaisuperstore.com.pk/myapi/area"
     );
     dispatch({

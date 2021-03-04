@@ -22,11 +22,7 @@ export default function Slider() {
   ];
 
   return (
-    <View
-      style={{
-        marginVertical: 20,
-      }}
-    >
+    <View>
       <FlatList
         pagingEnabled
         horizontal

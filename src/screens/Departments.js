@@ -35,8 +35,8 @@ export default function Departments(props) {
                 source={require("../../assets/category.jpg")}
                 style={{
                   width: 70,
-                  height: 70,
-                  resizeMode: "center",
+                  height: 50,
+                  resizeMode: "contain",
                 }}
               />
               <Text>Categories</Text>
@@ -51,8 +51,8 @@ export default function Departments(props) {
                 source={require("../../assets/subcategory.jpg")}
                 style={{
                   width: 70,
-                  height: 70,
-                  resizeMode: "center",
+                  height: 50,
+                  resizeMode: "contain",
                 }}
               />
               <Text>Sub Categories</Text>
@@ -74,7 +74,7 @@ export default function Departments(props) {
             style={{
               width: "100%",
               height: 100,
-              resizeMode: "center",
+              resizeMode: "contain",
             }}
           />
         </View>

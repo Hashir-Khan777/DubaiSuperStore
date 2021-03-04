@@ -1,8 +1,17 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { Add_To_Cart } from "../store/action/CartAction";
 
 export default function AllProductComponent(props) {
+  const dispatch = useDispatch();
+
+  const Cart = useSelector((state) => state.Cart);
+  const { flex, cartItems } = Cart;
+
+  console.log(flex, cartItems);
+
   return (
     <View style={styles.card}>
       <TouchableOpacity
@@ -33,13 +42,9 @@ export default function AllProductComponent(props) {
             style={styles.cartButton}
             activeOpacity={0.6}
             onPress={() =>
-              props.prop.navigation.navigate("Cart", {
-                id: props.id,
-                name: props.name,
-                quantity: 1,
-                image: props.image,
-                price: props.price,
-              })
+              dispatch(
+                Add_To_Cart(props.id, props.name, 1, props.image, props.price)
+              )
             }
           >
             <Ionicons name="cart" color="#fff" size={20} />
@@ -47,6 +52,11 @@ export default function AllProductComponent(props) {
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
+      {cartItems && (
+        <View style={styles.item}>
+          <Text>{cartItems.length}</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -87,5 +97,9 @@ const styles = StyleSheet.create({
   },
   description: {
     marginVertical: 10,
+  },
+  item: {
+    display: flex ? "flex" : "none",
+    width: "100%",
   },
 });
