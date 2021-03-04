@@ -38,6 +38,7 @@ export default function HotProducts(props) {
           height: 200,
           resizeMode: "center",
         }}
+        resizeMode="contain"
       />
       <View>
         <Text
@@ -78,6 +79,7 @@ export default function HotProducts(props) {
                           height: 100,
                           resizeMode: "center",
                         }}
+                        resizeMode="center"
                       />
                     </TouchableOpacity>
                     <Text style={styles.description}>{item.SKUName}</Text>
@@ -151,6 +153,7 @@ export default function HotProducts(props) {
                           height: 100,
                           resizeMode: "center",
                         }}
+                        resizeMode="contain"
                       />
                     </TouchableOpacity>
                     <Text style={styles.description}>{item.SKUName}</Text>

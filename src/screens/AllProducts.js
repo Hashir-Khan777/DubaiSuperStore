@@ -22,11 +22,7 @@ export default function AllProducts(props) {
   const Cart = useSelector((state) => state.Cart);
   const { cartItems } = Cart;
 
-  const state = useSelector((state) => state.AllProducts);
-
-  console.log(state);
-
-  Products && (Products.length = 20);
+  // Products && (Products.length = 20);
 
   useEffect(() => {
     dispatch(Fetch_All_Products());

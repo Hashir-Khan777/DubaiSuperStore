@@ -26,6 +26,7 @@ export default function AllProductComponent(props) {
             source={{
               uri: props.image,
             }}
+            resizeMode="contain"
           />
         </View>
         <Text style={styles.description}>{props.name}</Text>
