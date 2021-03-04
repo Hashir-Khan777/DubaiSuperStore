@@ -1,16 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Add_To_Cart } from "../store/action/CartAction";
 
 export default function AllProductComponent(props) {
   const dispatch = useDispatch();
-
-  const Cart = useSelector((state) => state.Cart);
-  const { flex, cartItems } = Cart;
-
-  console.log(flex, cartItems);
 
   return (
     <View style={styles.card}>
@@ -52,11 +47,6 @@ export default function AllProductComponent(props) {
           </TouchableOpacity>
         </View>
       </TouchableOpacity>
-      {cartItems && (
-        <View style={styles.item}>
-          <Text>{cartItems.length}</Text>
-        </View>
-      )}
     </View>
   );
 }
@@ -99,7 +89,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   item: {
-    display: flex ? "flex" : "none",
+    // display: flex ? "flex" : "none",
     width: "100%",
   },
 });

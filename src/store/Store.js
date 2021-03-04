@@ -8,6 +8,8 @@ import {
   FetchProductsReducer,
   SubCategoriesReducer,
   FetchAreaReducer,
+  FetchHotProductsReducer,
+  FetchSaleProductsReducer,
 } from "./reducer/FetchDataReducer";
 
 const reducer = combineReducers({
@@ -18,6 +20,8 @@ const reducer = combineReducers({
   Cart: CartReducer,
   AllBrands: FetchBrandReducer,
   AllAreas: FetchAreaReducer,
+  ToRatedProducts: FetchHotProductsReducer,
+  TopSaleProducts: FetchSaleProductsReducer,
 });
 
 const Store = createStore(reducer, compose(applyMiddleware(thunk)));

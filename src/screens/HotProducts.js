@@ -10,18 +10,23 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { Add_To_Cart } from "../store/action/CartAction";
-import { Fetch_All_Products } from "../store/action/FetchData";
+import {
+  Fetch_Hot_Products,
+  Fetch_Sale_Products,
+} from "../store/action/FetchData";
 
 export default function HotProducts(props) {
   const dispatch = useDispatch();
 
-  const AllProducts = useSelector((state) => state.AllProducts);
-  const { loading, error, Products } = AllProducts;
+  const ToRatedProducts = useSelector((state) => state.ToRatedProducts);
+  const { error, HotProducts } = ToRatedProducts;
 
-  Products && (Products.length = 17);
+  const TopSaleProducts = useSelector((state) => state.TopSaleProducts);
+  const { Saleerror, SaleProducts } = TopSaleProducts;
 
   useEffect(() => {
-    dispatch(Fetch_All_Products());
+    dispatch(Fetch_Hot_Products());
+    dispatch(Fetch_Sale_Products());
   }, [dispatch]);
 
   return (
@@ -48,10 +53,11 @@ export default function HotProducts(props) {
         </Text>
         <View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {loading ? null : error ? (
+            {error ? (
               <Text>{error}</Text>
             ) : (
-              Products.map((item) => {
+              HotProducts &&
+              HotProducts.map((item) => {
                 return (
                   <View style={styles.card} key={item.RowId}>
                     <TouchableOpacity
@@ -120,10 +126,11 @@ export default function HotProducts(props) {
         </Text>
         <View>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {loading ? null : error ? (
-              <Text>{error}</Text>
+            {Saleerror ? (
+              <Text>{Saleerror}</Text>
             ) : (
-              Products.map((item) => {
+              SaleProducts &&
+              SaleProducts.map((item) => {
                 return (
                   <View style={styles.card} key={item.RowId}>
                     <TouchableOpacity

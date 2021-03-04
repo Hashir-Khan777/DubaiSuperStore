@@ -4,7 +4,9 @@ const INITIAL_STATE = {
   SubCategories: [],
   Products: [],
   Brands: [],
-  Areas: []
+  Areas: [],
+  HotProducts: [],
+  SaleProducts: [],
 };
 
 const DepartmentReducer = (state = INITIAL_STATE, action) => {
@@ -103,6 +105,54 @@ const FetchProductsReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
+const FetchHotProductsReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case "FETCH_HOT_PRODUCTS_REQUEST":
+      return {
+        loading: true,
+      };
+
+    case "FETCH_HOT_PRODUCTS_SUCCESS":
+      return {
+        loading: false,
+        HotProducts: action.payload,
+      };
+
+    case "FETCH_HOT_PRODUCTS_FAIL":
+      return {
+        loading: false,
+        error: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
+const FetchSaleProductsReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case "FETCH_SALE_PRODUCTS_REQUEST":
+      return {
+        loading: true,
+      };
+
+    case "FETCH_SALE_PRODUCTS_SUCCESS":
+      return {
+        loading: false,
+        SaleProducts: action.payload,
+      };
+
+    case "FETCH_SALE_PRODUCTS_FAIL":
+      return {
+        loading: false,
+        Saleerror: action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
+
 const FetchBrandReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "FETCH_BRAND_REQUEST":
@@ -158,4 +208,6 @@ export {
   FetchProductsReducer,
   FetchBrandReducer,
   FetchAreaReducer,
+  FetchHotProductsReducer,
+  FetchSaleProductsReducer,
 };
