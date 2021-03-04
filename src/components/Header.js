@@ -23,6 +23,8 @@ export default function Header(props) {
       props.subcatprop.navigation.openDrawer();
     } else if (props.name === "relaedsubcategories") {
       props.subprop.navigation.openDrawer();
+    } else if (props.name === "relatedproducts") {
+      props.productprop.navigation.openDrawer();
     } else if (props.name === "Brands") {
       props.brandprop.navigation.openDrawer();
     } else if (props.name === "allDeparts") {
@@ -45,6 +47,8 @@ export default function Header(props) {
       props.subcatprop.navigation.navigate("Cart");
     } else if (props.name === "relaedsubcategories") {
       props.subprop.navigation.navigate("Cart");
+    } else if (props.name === "relatedproducts") {
+      props.productprop.navigation.navigate("Cart");
     } else if (props.name === "Brands") {
       props.brandprop.navigation.navigate("Cart");
     } else if (props.name === "allDeparts") {

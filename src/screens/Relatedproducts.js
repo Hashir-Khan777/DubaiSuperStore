@@ -1,6 +1,13 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, ScrollView, SafeAreaView } from "react-native";
-import { ActivityIndicator } from "react-native-paper";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  SafeAreaView,
+  ActivityIndicator,
+  TouchableOpacity,
+} from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import AllProductComponent from "../components/AllProductComponent";
 import Header from "../components/Header";
@@ -12,6 +19,9 @@ export default function Relatedproducts(props) {
   const AllProducts = useSelector((state) => state.AllProducts);
   const { loading, error, Products } = AllProducts;
 
+  const Cart = useSelector((state) => state.Cart);
+  const { cartItems } = Cart;
+
   const relatedProducts =
     Products && Products.filter((x) => x.SKUSubCatId == props.route.params.id);
 
@@ -20,11 +30,11 @@ export default function Relatedproducts(props) {
   }, [dispatch]);
 
   return (
-    <SafeAreaView>
-      <View>
-        <Header productprop={props} name={props.route.name} />
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header productprop={props} name={props.route.name} />
+      <ScrollView>
         <View>
-          <ScrollView>
+          <View>
             <Text style={styles.productHeading}>Products</Text>
             <View style={styles.products}>
               {loading ? (
@@ -46,9 +56,45 @@ export default function Relatedproducts(props) {
                 })
               )}
             </View>
-          </ScrollView>
+          </View>
         </View>
-      </View>
+      </ScrollView>
+      {cartItems.length >= 1 && (
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+            paddingVertical: 10,
+            backgroundColor: "#d3d3d3",
+          }}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <View style={{ marginRight: 30 }}>
+              <Text>item: {cartItems.length}</Text>
+            </View>
+            <View>
+              <Text>
+                Rs. {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+              </Text>
+            </View>
+          </View>
+          <View>
+            <TouchableOpacity
+              activeOpacity={0.6}
+              onPress={() => props.navigation.navigate("Cart")}
+            >
+              <Text style={{ color: "#000" }}>View Cart</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      )}
     </SafeAreaView>
   );
 }
