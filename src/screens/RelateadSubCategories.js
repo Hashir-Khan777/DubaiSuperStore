@@ -26,6 +26,9 @@ export default function RelateadSubCategories(props) {
   const AllProducts = useSelector((state) => state.AllProducts);
   const { Products } = AllProducts;
 
+  const Cart = useSelector((state) => state.Cart);
+  const { cartItems } = Cart;
+
   const relatedSubCategories =
     SubCategories &&
     SubCategories.filter((x) => x.SKUCatId == props.route.params.id);
@@ -33,13 +36,15 @@ export default function RelateadSubCategories(props) {
   const relatedProducts =
     Products && Products.filter((x) => x.SKUCatId == props.route.params.id);
 
+  console.log(relatedProducts);
+
   useEffect(() => {
     dispatch(Fetch_Sub_Categories());
     dispatch(Fetch_All_Products());
   }, [dispatch]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Header name={props.route.name} subprop={props} />
       <ScrollView>
         <View>
@@ -99,6 +104,45 @@ export default function RelateadSubCategories(props) {
           </View>
         </View>
       </ScrollView>
+      {relatedSubCategories && relatedSubCategories.length <= 0
+        ? cartItems.length >= 1 && (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                paddingVertical: 10,
+                backgroundColor: "#d3d3d3",
+              }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <View style={{ marginRight: 30 }}>
+                  <Text>item: {cartItems.length}</Text>
+                </View>
+                <View>
+                  <Text>
+                    Rs.
+                    {cartItems.reduce((a, c) => a + c.price * c.quantity, 0)}
+                  </Text>
+                </View>
+              </View>
+              <View>
+                <TouchableOpacity
+                  activeOpacity={0.6}
+                  onPress={() => props.navigation.navigate("Cart")}
+                >
+                  <Text style={{ color: "#000" }}>View Cart</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )
+        : null}
     </SafeAreaView>
   );
 }
