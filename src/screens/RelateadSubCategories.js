@@ -36,8 +36,6 @@ export default function RelateadSubCategories(props) {
   const relatedProducts =
     Products && Products.filter((x) => x.SKUCatId == props.route.params.id);
 
-  console.log(relatedProducts);
-
   useEffect(() => {
     dispatch(Fetch_Sub_Categories());
     dispatch(Fetch_All_Products());
