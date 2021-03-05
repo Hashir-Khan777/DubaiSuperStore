@@ -1,9 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const INITIAL_STATE = {
-  cartItems: [],
-};
-
 const getData = async () => {
   try {
     const data = await AsyncStorage.getItem("products");
@@ -14,6 +10,12 @@ const getData = async () => {
     console.log(err.message);
   }
 };
+
+const INITIAL_STATE = {
+  cartItems: [],
+};
+
+getData();
 
 const CartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -49,7 +51,5 @@ const CartReducer = (state = INITIAL_STATE, action) => {
       return state;
   }
 };
-
-getData();
 
 export { CartReducer };

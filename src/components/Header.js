@@ -8,8 +8,12 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import Constants from "expo-constants";
+import { useSelector } from "react-redux";
 
 export default function Header(props) {
+  const Cart = useSelector((state) => state.Cart);
+  const { cartItems } = Cart;
+
   const openDrawer = () => {
     if (props.name === "Cart") {
       props.cartProp.navigation.openDrawer();
@@ -75,12 +79,32 @@ export default function Header(props) {
         </View>
         <View>
           {props.name !== "Cart" ? (
-            <Ionicons
-              name="cart"
-              style={styles.cartIcon}
-              size={30}
-              onPress={goCart}
-            />
+            <View>
+              <Ionicons
+                name="cart"
+                style={styles.cartIcon}
+                size={30}
+                onPress={goCart}
+              />
+              {cartItems.length >= 1 && (
+                <Text
+                  style={{
+                    position: "absolute",
+                    color: "#fff",
+                    backgroundColor: "red",
+                    width: 20,
+                    height: 20,
+                    borderRadius: 100,
+                    textAlign: "center",
+                    textAlignVertical: "center",
+                    top: -10,
+                    right: -10,
+                  }}
+                >
+                  {cartItems.length}
+                </Text>
+              )}
+            </View>
           ) : null}
         </View>
       </View>

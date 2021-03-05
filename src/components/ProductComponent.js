@@ -13,12 +13,16 @@ import { ScrollView } from "react-native-gesture-handler";
 export default function ProductComponent(props) {
   const product = props.route.params;
 
-  const [qty, setQty] = useState(
-    product.quantity ? product.quantity.toString() : "1"
-  );
+  const [qty, setQty] = useState(product.quantity ? product.quantity : 1);
+
+  qty <= 0 && setQty(1);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView
+      style={{
+        flex: 1,
+      }}
+    >
       <View>
         <ScrollView>
           <View>
@@ -34,20 +38,47 @@ export default function ProductComponent(props) {
             <Text style={styles.departPrice}>{product.price}</Text>
           </View>
           <View style={styles.increase}>
-            <Text>+</Text>
+            <TouchableOpacity activeOpacity={1} onPress={() => setQty(qty - 1)}>
+              <Text
+                style={{
+                  color: "#000",
+                  backgroundColor: "yellow",
+                  borderRadius: 50,
+                  width: 30,
+                  height: 30,
+                  textAlign: "center",
+                  textAlignVertical: "center",
+                  fontSize: 16,
+                }}
+              >
+                -
+              </Text>
+            </TouchableOpacity>
             <TextInput
               style={{
                 textAlign: "center",
-                width: 50,
+                marginHorizontal: 10,
               }}
               onChangeText={(e) => setQty(e)}
               keyboardType="number-pad"
-              value={qty}
-              style={{
-                marginHorizontal: 10,
-              }}
+              value={qty.toString()}
             />
-            <Text>-</Text>
+            <TouchableOpacity activeOpacity={1} onPress={() => setQty(qty + 1)}>
+              <Text
+                style={{
+                  color: "#000",
+                  backgroundColor: "yellow",
+                  borderRadius: 50,
+                  width: 30,
+                  height: 30,
+                  textAlign: "center",
+                  textAlignVertical: "center",
+                  fontSize: 16,
+                }}
+              >
+                +
+              </Text>
+            </TouchableOpacity>
           </View>
           <View>
             <TouchableOpacity

@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware, combineReducers, compose } from "redux";
+import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
 import { CartReducer } from "./reducer/CartReducer";
 import {
@@ -24,6 +24,6 @@ const reducer = combineReducers({
   TopSaleProducts: FetchSaleProductsReducer,
 });
 
-const Store = createStore(reducer, compose(applyMiddleware(thunk)));
+const Store = createStore(reducer, applyMiddleware(thunk));
 
 export default Store;

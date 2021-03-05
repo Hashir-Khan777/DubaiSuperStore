@@ -24,6 +24,7 @@ export default function Slider() {
   return (
     <View>
       <FlatList
+        keyExtractor={(item) => item.id.toString()}
         pagingEnabled
         horizontal
         showsHorizontalScrollIndicator={false}

@@ -22,8 +22,6 @@ export default function AllProducts(props) {
   const Cart = useSelector((state) => state.Cart);
   const { cartItems } = Cart;
 
-  // Products && (Products.length = 20);
-
   useEffect(() => {
     dispatch(Fetch_All_Products());
   }, [dispatch]);

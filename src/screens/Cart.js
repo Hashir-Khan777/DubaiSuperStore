@@ -1,6 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Image,
   SafeAreaView,
@@ -9,6 +8,7 @@ import {
   TouchableOpacity,
   View,
   Alert,
+  TextInput,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import { useDispatch, useSelector } from "react-redux";
@@ -68,6 +68,7 @@ export default function Cart(props) {
             </View>
           ) : (
             cartItems.map((item) => {
+              item.quantity <= 0 && (item.quantity = 1);
               return (
                 <TouchableOpacity
                   key={item.id}
@@ -112,8 +113,81 @@ export default function Cart(props) {
                         }}
                       >
                         <View>
-                          <Text>Qty</Text>
-                          <Text>{item.quantity}</Text>
+                          <Text style={{ textAlign: "center" }}>Qty</Text>
+                          <View
+                            style={{
+                              display: "flex",
+                              flexDirection: "row",
+                              justifyContent: "center",
+                              alignItems: "center",
+                            }}
+                          >
+                            <TouchableOpacity
+                              activeOpacity={1}
+                              onPress={() =>
+                                dispatch(
+                                  Add_To_Cart(
+                                    item.id,
+                                    item.name,
+                                    item.quantity - 1,
+                                    item.image,
+                                    item.price
+                                  )
+                                )
+                              }
+                            >
+                              <Text
+                                style={{
+                                  color: "#000",
+                                  backgroundColor: "yellow",
+                                  borderRadius: 50,
+                                  width: 30,
+                                  height: 30,
+                                  textAlign: "center",
+                                  textAlignVertical: "center",
+                                  fontSize: 16,
+                                }}
+                              >
+                                -
+                              </Text>
+                            </TouchableOpacity>
+                            <TextInput
+                              style={{
+                                textAlign: "center",
+                              }}
+                              value={item.quantity.toString()}
+                              keyboardType="number-pad"
+                            />
+                            <TouchableOpacity
+                              activeOpacity={1}
+                              onPress={() =>
+                                dispatch(
+                                  Add_To_Cart(
+                                    item.id,
+                                    item.name,
+                                    item.quantity + 1,
+                                    item.image,
+                                    item.price
+                                  )
+                                )
+                              }
+                            >
+                              <Text
+                                style={{
+                                  color: "#000",
+                                  backgroundColor: "yellow",
+                                  borderRadius: 50,
+                                  width: 30,
+                                  height: 30,
+                                  textAlign: "center",
+                                  textAlignVertical: "center",
+                                  fontSize: 16,
+                                }}
+                              >
+                                +
+                              </Text>
+                            </TouchableOpacity>
+                          </View>
                         </View>
                         <View>
                           <Text>Price</Text>
