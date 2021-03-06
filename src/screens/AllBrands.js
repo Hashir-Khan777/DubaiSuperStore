@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Header from "../components/Header";
@@ -23,10 +24,10 @@ export default function AllBrands(props) {
   }, [dispatch]);
 
   return (
-    <View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <Header name={props.route.name} brandprop={props} />
-      <View>
-        <ScrollView>
+      <ScrollView>
+        <View>
           <View>
             <Text style={styles.categoryHeading}>All Brands</Text>
             <View style={styles.components}>
@@ -60,9 +61,9 @@ export default function AllBrands(props) {
               )}
             </View>
           </View>
-        </ScrollView>
-      </View>
-    </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -75,9 +76,12 @@ const styles = StyleSheet.create({
   },
   card: {
     position: "relative",
-    width: "40%",
+    width: "45%",
     borderRadius: 10,
-    marginVertical: 5,
+    marginVertical: 15,
+    marginHorizontal: 5,
+    backgroundColor: "#fff",
+    elevation: 10,
   },
   departImage: {
     width: "100%",
@@ -85,6 +89,8 @@ const styles = StyleSheet.create({
   },
   departText: {
     textAlign: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 10,
   },
   categoryHeading: {
     textAlign: "center",

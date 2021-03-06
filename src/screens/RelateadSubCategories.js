@@ -42,7 +42,7 @@ export default function RelateadSubCategories(props) {
   }, [dispatch]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <Header name={props.route.name} subprop={props} />
       <ScrollView>
         <View>
@@ -154,9 +154,12 @@ const styles = StyleSheet.create({
   },
   card: {
     position: "relative",
-    width: "40%",
+    width: "45%",
     borderRadius: 10,
-    marginVertical: 5,
+    marginVertical: 15,
+    marginHorizontal: 5,
+    backgroundColor: "#fff",
+    elevation: 10,
   },
   departImage: {
     width: "100%",
@@ -164,6 +167,8 @@ const styles = StyleSheet.create({
   },
   departText: {
     textAlign: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 10,
   },
   categoryHeading: {
     textAlign: "center",

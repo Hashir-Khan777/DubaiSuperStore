@@ -24,9 +24,9 @@ export default function Categories(props) {
   }, [dispatch]);
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <Header name={props.route.name} catprop={props} />
-      <ScrollView style={{ marginBottom: 100 }}>
+      <ScrollView>
         <View>
           <View>
             <View>
@@ -82,9 +82,12 @@ const styles = StyleSheet.create({
   },
   card: {
     position: "relative",
-    width: "40%",
+    width: "45%",
     borderRadius: 10,
-    marginVertical: 5,
+    marginVertical: 15,
+    marginHorizontal: 5,
+    backgroundColor: "#fff",
+    elevation: 10,
   },
   departImage: {
     width: "100%",
@@ -92,6 +95,8 @@ const styles = StyleSheet.create({
   },
   departText: {
     textAlign: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 10,
   },
   categoryHeading: {
     textAlign: "center",

@@ -6,7 +6,6 @@ import {
   Text,
   SafeAreaView,
   TouchableOpacity,
-  Image,
 } from "react-native";
 
 export default function Login() {
@@ -27,12 +26,6 @@ export default function Login() {
               <Text style={styles.button}>Log in</Text>
             </TouchableOpacity>
           </View>
-        </View>
-        <View>
-          <Text>Already have an account</Text>
-          <TouchableOpacity activeOpacity={0.6}>
-            <Text>Sign Up</Text>
-          </TouchableOpacity>
         </View>
       </View>
     </SafeAreaView>

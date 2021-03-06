@@ -199,6 +199,8 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     backgroundColor: "#fff",
     padding: 10,
+    elevation: 10,
+    marginHorizontal: 10,
   },
   buttonPrice: {
     display: "flex",

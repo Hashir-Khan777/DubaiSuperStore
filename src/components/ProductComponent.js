@@ -9,6 +9,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import Constants from "expo-constants";
 
 export default function ProductComponent(props) {
   const product = props.route.params;
@@ -21,6 +22,8 @@ export default function ProductComponent(props) {
     <SafeAreaView
       style={{
         flex: 1,
+        marginTop: Constants.statusBarHeight,
+        backgroundColor: "#fff",
       }}
     >
       <View>
@@ -63,7 +66,10 @@ export default function ProductComponent(props) {
               keyboardType="number-pad"
               value={qty.toString()}
             />
-            <TouchableOpacity activeOpacity={1} onPress={() => setQty(qty + 1)}>
+            <TouchableOpacity
+              activeOpacity={1}
+              onPress={() => setQty(Number(qty) + 1)}
+            >
               <Text
                 style={{
                   color: "#000",
@@ -106,7 +112,7 @@ const styles = StyleSheet.create({
   departImage: {
     width: "100%",
     height: 300,
-    resizeMode: "center",
+    resizeMode: "contain",
   },
   departText: {
     margin: 10,

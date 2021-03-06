@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Image,
   SafeAreaView,
@@ -45,10 +45,16 @@ export default function Cart(props) {
   }, [dispatch]);
 
   return (
-    <SafeAreaView style={{ flex: 1, flexDirection: "column" }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        flexDirection: "column",
+        backgroundColor: "#fff",
+      }}
+    >
       <Header name={props.route.name} cartProp={props} />
       <ScrollView>
-        <View>
+        <View style={{ marginHorizontal: 15 }}>
           {cartItems.length <= 0 ? (
             <View>
               <View style={styles.cartContainer}>
@@ -252,6 +258,7 @@ const styles = StyleSheet.create({
   cartEmptyButton: {
     backgroundColor: "blue",
     paddingVertical: 10,
+    borderRadius: 5,
   },
   cartEmptyButtonText: {
     color: "#fff",
@@ -264,11 +271,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginVertical: 8,
+    elevation: 10,
+    paddingVertical: 10,
+    borderRadius: 5,
   },
   cardImage: {
     width: 100,
     height: 100,
-    resizeMode: "center",
+    resizeMode: "contain",
   },
   checkout: {
     flexDirection: "row",

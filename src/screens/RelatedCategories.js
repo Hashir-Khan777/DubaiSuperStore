@@ -28,11 +28,11 @@ export default function RelatedCategories(props) {
   }, [dispatch]);
 
   return (
-    <SafeAreaView>
-      <View>
-        <Header name={props.route.name} subcatprop={props} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <Header name={props.route.name} subcatprop={props} />
+      <ScrollView>
         <View>
-          <ScrollView>
+          <View>
             <View>
               <Text style={styles.categoryHeading}>Categories</Text>
               <View style={styles.components}>
@@ -70,9 +70,9 @@ export default function RelatedCategories(props) {
                 )}
               </View>
             </View>
-          </ScrollView>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -86,9 +86,12 @@ const styles = StyleSheet.create({
   },
   card: {
     position: "relative",
-    width: "40%",
+    width: "45%",
     borderRadius: 10,
-    marginVertical: 5,
+    marginVertical: 15,
+    marginHorizontal: 5,
+    backgroundColor: "#fff",
+    elevation: 10,
   },
   departImage: {
     width: "100%",
@@ -96,6 +99,8 @@ const styles = StyleSheet.create({
   },
   departText: {
     textAlign: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 10,
   },
   categoryHeading: {
     textAlign: "center",

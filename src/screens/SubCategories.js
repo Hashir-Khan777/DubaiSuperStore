@@ -24,11 +24,11 @@ export default function SubCategories(props) {
   }, [dispatch]);
 
   return (
-    <SafeAreaView>
-      <View>
-        <Header name={props.route.name} subprop={props} />
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+      <Header name={props.route.name} subprop={props} />
+      <ScrollView>
         <View>
-          <ScrollView>
+          <View>
             <Text style={styles.categoryHeading}>Sub Categories</Text>
             <View style={styles.components}>
               {loading ? (
@@ -64,9 +64,9 @@ export default function SubCategories(props) {
                 })
               )}
             </View>
-          </ScrollView>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -80,9 +80,12 @@ const styles = StyleSheet.create({
   },
   card: {
     position: "relative",
-    width: "40%",
+    width: "45%",
     borderRadius: 10,
-    marginVertical: 5,
+    marginVertical: 15,
+    marginHorizontal: 5,
+    backgroundColor: "#fff",
+    elevation: 10,
   },
   departImage: {
     width: "100%",
@@ -90,6 +93,8 @@ const styles = StyleSheet.create({
   },
   departText: {
     textAlign: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 10,
   },
   categoryHeading: {
     textAlign: "center",

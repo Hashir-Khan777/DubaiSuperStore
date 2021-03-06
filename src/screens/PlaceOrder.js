@@ -15,8 +15,6 @@ export default function PlaceOrder(props) {
   const Cart = useSelector((state) => state.Cart);
   const { cartItems } = Cart;
 
-  console.log(typeof props.route.params.price);
-
   return (
     <SafeAreaView
       style={{
@@ -101,7 +99,13 @@ export default function PlaceOrder(props) {
 
                 <View style={styles.cartItems}>
                   <Text>Delivery Charges:</Text>
-                  <Text>{props.route.params.price}</Text>
+                  <Text>
+                    {Number(
+                      cartItems.reduce((a, c) => a + c.quantity * c.price, 0)
+                    ).toFixed(2) > 2000
+                      ? 0
+                      : props.route.params.price}
+                  </Text>
                 </View>
               </View>
 

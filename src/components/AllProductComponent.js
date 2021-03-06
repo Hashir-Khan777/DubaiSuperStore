@@ -60,11 +60,12 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     backgroundColor: "#fff",
     padding: 10,
+    elevation: 10,
   },
   departImage: {
     width: "100%",
     height: 150,
-    resizeMode: "center",
+    resizeMode: "contain",
   },
   buttonPrice: {
     display: "flex",
@@ -90,7 +91,6 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   item: {
-    // display: flex ? "flex" : "none",
     width: "100%",
   },
 });

@@ -27,7 +27,7 @@ export default function AllProducts(props) {
   }, [dispatch]);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <Header productprop={props} name={props.route.name} />
       <ScrollView>
         <View>

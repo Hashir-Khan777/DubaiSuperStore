@@ -78,7 +78,7 @@ export default function Header(props) {
           </View>
         </View>
         <View>
-          {props.name !== "Cart" ? (
+          {props.name !== "Cart" && (
             <View>
               <Ionicons
                 name="cart"
@@ -86,7 +86,7 @@ export default function Header(props) {
                 size={30}
                 onPress={goCart}
               />
-              {cartItems.length >= 1 && (
+              {cartItems && cartItems.length >= 1 && (
                 <Text
                   style={{
                     position: "absolute",
@@ -98,14 +98,15 @@ export default function Header(props) {
                     textAlign: "center",
                     textAlignVertical: "center",
                     top: -10,
-                    right: -10,
+                    right: -8,
+                    fontWeight: "bold",
                   }}
                 >
                   {cartItems.length}
                 </Text>
               )}
             </View>
-          ) : null}
+          )}
         </View>
       </View>
     </SafeAreaView>
