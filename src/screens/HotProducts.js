@@ -68,7 +68,7 @@ export default function HotProducts(props) {
                           image: item.SKUImageURL1,
                           name: item.SKUName,
                           price: item.SalePrice,
-                          id: item.RowId,
+                          id: item.SKUId,
                         })
                       }
                     >
@@ -93,7 +93,7 @@ export default function HotProducts(props) {
                         onPress={() =>
                           dispatch(
                             Add_To_Cart(
-                              item.RowId,
+                              item.SKUId,
                               item.SKUName,
                               1,
                               item.SKUImageURL1,
@@ -134,7 +134,7 @@ export default function HotProducts(props) {
               SaleProducts &&
               SaleProducts.map((item) => {
                 return (
-                  <View style={styles.card} key={item.RowId}>
+                  <View style={styles.card} key={item.SKUId}>
                     <TouchableOpacity
                       activeOpacity={1}
                       onPress={() =>
@@ -167,7 +167,7 @@ export default function HotProducts(props) {
                         onPress={() =>
                           dispatch(
                             Add_To_Cart(
-                              item.RowId,
+                              item.SKUId,
                               item.SKUName,
                               1,
                               item.SKUImageURL1,

@@ -47,7 +47,7 @@ export default function AllProducts(props) {
                       name={item.SKUName}
                       image={item.SKUImageURL1}
                       price={item.SalePrice}
-                      id={item.RowId}
+                      id={item.SKUId}
                     />
                   );
                 })
