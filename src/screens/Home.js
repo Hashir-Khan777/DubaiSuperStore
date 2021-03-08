@@ -1,5 +1,5 @@
 import React from "react";
-import { View, SafeAreaView } from "react-native";
+import { View, SafeAreaView, Dimensions } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Header from "../components/Header";
 import SearchBar from "../components/SearchBar";
@@ -10,14 +10,10 @@ import HotProducts from "./HotProducts";
 export default function Home(props) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <View>
-        <Header prop={props} />
+      <Header prop={props} />
+      <ScrollView>
         <View>
-          <ScrollView
-            style={{
-              marginBottom: 170,
-            }}
-          >
+          <View>
             <View>
               <View>
                 <SearchBar />
@@ -32,9 +28,9 @@ export default function Home(props) {
                 <HotProducts prop={props} />
               </View>
             </View>
-          </ScrollView>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }

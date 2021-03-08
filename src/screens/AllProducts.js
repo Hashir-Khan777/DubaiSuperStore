@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -7,20 +7,37 @@ import {
   SafeAreaView,
   ActivityIndicator,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import AllProductComponent from "../components/AllProductComponent";
 import Header from "../components/Header";
 import { Fetch_All_Products } from "../store/action/FetchData";
 
-export default function AllProducts(props) {
-  const dispatch = useDispatch();
+var Productslength = 10;
 
+export default function AllProducts(props) {
   const AllProducts = useSelector((state) => state.AllProducts);
   const { loading, error, Products } = AllProducts;
 
   const Cart = useSelector((state) => state.Cart);
   const { cartItems } = Cart;
+
+  const dispatch = useDispatch();
+
+  const fetchMore = (len) => {
+    Productslength = Productslength + len;
+  };
+
+  Products && (Products.length = Productslength);
+
+  const isCloseToBottom = ({
+    layoutMeasurement,
+    contentOffset,
+    contentSize,
+  }) => {
+    return layoutMeasurement.height + contentOffset.y >= contentSize.height;
+  };
 
   useEffect(() => {
     dispatch(Fetch_All_Products());
@@ -29,7 +46,15 @@ export default function AllProducts(props) {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       <Header productprop={props} name={props.route.name} />
-      <ScrollView>
+      <ScrollView
+        onScroll={({ nativeEvent }) => {
+          if (isCloseToBottom(nativeEvent)) {
+            fetchMore(5);
+            console.log(Productslength);
+            dispatch(Fetch_All_Products());
+          }
+        }}
+      >
         <View>
           <View>
             <Text style={styles.productHeading}>Products</Text>
